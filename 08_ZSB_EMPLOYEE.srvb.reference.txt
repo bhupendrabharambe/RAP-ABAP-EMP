@@ -1,0 +1,38 @@
+-- SERVICE BINDING: ZSB_EMPLOYEE
+-- This object is created via SAP ADT UI (not pure code), but the config is:
+--
+--   Name        : ZSB_EMPLOYEE
+--   Description : Employee Service Binding
+--   Binding Type: OData V4 - UI
+--   Service Def : ZSD_EMPLOYEE
+--
+-- After creating the binding in ADT:
+--   1. Click "Publish" to activate the OData endpoint.
+--   2. Click "Preview" to open the Fiori Elements preview directly.
+--
+-- The resulting OData URL path will be:
+--   /sap/opu/odata4/sap/zsd_employee/srvd/sap/zsd_employee/0001/
+--
+-- For OData V2 (classic Fiori):
+--   Binding Type: OData V2 - UI
+--   URL path: /sap/opu/odata/sap/ZSD_EMPLOYEE_0001/
+
+-- ======================================================
+-- Alternative: Service Binding via transport (asbdef)
+-- ======================================================
+-- If your system supports code-based binding definitions,
+-- the equivalent XML registration looks like:
+
+/*
+<srvb:serviceBinding
+  xmlns:srvb="http://www.sap.com/adt/ddic/srvb"
+  srvb:bindingType="ODATA_V4_UI"
+  srvb:serviceName="ZSD_EMPLOYEE"
+  srvb:serviceVersion="0001">
+  <srvb:services>
+    <srvb:service
+      srvb:serviceName="ZSD_EMPLOYEE"
+      srvb:serviceVersion="0001"/>
+  </srvb:services>
+</srvb:serviceBinding>
+*/

@@ -1,0 +1,17 @@
+projection;
+strict ( 2 );
+
+define behavior for ZC_EMPLOYEE alias Employee
+{
+  use create;
+  use update;
+  use delete;
+
+  use action deactivateEmployee;
+  use action activateEmployee;
+
+  use validation validateEmail;
+  use validation validateHireDate;
+
+  use determination setDefaultValues;
+}

@@ -1,0 +1,55 @@
+managed implementation in class zbp_i_employee unique;
+strict ( 2 );
+
+define behavior for ZI_EMPLOYEE alias Employee
+persistent table zemployee
+lock master
+authorization master ( instance )
+etag master LocalLastChangedAt
+{
+  // Standard CRUD operations
+  create;
+  update;
+  delete;
+
+  // Field control
+  field ( readonly ) EmployeeId, CreatedBy, CreatedAt, LastChangedBy, LastChangedAt, LocalLastChangedAt;
+  field ( mandatory ) FirstName, LastName, Email, Department, Position, HireDate;
+
+  // Numbering
+  mapping for zemployee corresponding
+  {
+    EmployeeId           = employee_id;
+    FirstName            = first_name;
+    LastName             = last_name;
+    Email                = email;
+    Department           = department;
+    Position             = position;
+    HireDate             = hire_date;
+    Salary               = salary;
+    IsActive             = is_active;
+    CreatedBy            = created_by;
+    CreatedAt            = created_at;
+    LastChangedBy        = last_changed_by;
+    LastChangedAt        = last_changed_at;
+    LocalLastChangedAt   = local_last_changed_at;
+  }
+
+  // Validations
+  validation validateEmail on save { create; update; }
+  validation validateHireDate on save { create; update; }
+
+  // Determinations
+  determination setDefaultValues on modify { create; }
+
+  // Actions
+  action deactivateEmployee result [1] $self;
+  action activateEmployee   result [1] $self;
+
+  // Draft handling (comment out if not needed)
+  // draft action Edit;
+  // draft action Activate;
+  // draft action Discard;
+  // draft action Resume;
+  // draft determine action Prepare;
+}
